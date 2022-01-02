@@ -19,9 +19,12 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private float _chaseRange = 15f;
     private float distanceToTarget;
 
+    private string PLAYERPARAMETR = "Player";
+    private string ATTACKPARAMETR = "attack";
+
     private void Awake()
     {
-        m_PlayerTarget = GameObject.FindWithTag("Player").transform;
+        m_PlayerTarget = GameObject.FindWithTag(PLAYERPARAMETR).transform;
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Anim = GetComponent<Animator>();
     }
@@ -50,12 +53,10 @@ public class MonsterAI : MonoBehaviour
                 else
                 {
                     m_WalkIndex++;
-                    print("лол");
+                   
                 }
             }
         }
-       
-
     }
 
     private void FollowPlayer()
@@ -63,13 +64,12 @@ public class MonsterAI : MonoBehaviour
         m_NavAgent.SetDestination(m_PlayerTarget.position);
         if (distanceToTarget <= m_NavAgent.stoppingDistance)
         {
-            m_Anim.SetBool("attack",true);
+            m_Anim.SetBool(ATTACKPARAMETR,true);
         }
         else
         {
-            m_Anim.SetBool("attack",false);
+            m_Anim.SetBool(ATTACKPARAMETR,false);
         }
-        
-        
     }
+    
 }

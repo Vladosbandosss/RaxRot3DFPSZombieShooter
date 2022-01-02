@@ -7,8 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     PlayerHealth target;
     [SerializeField] private int damage = 5;
-
-
+    
     private void Start()
     {
         target = FindObjectOfType<PlayerHealth>();
@@ -20,6 +19,7 @@ public class EnemyAttack : MonoBehaviour
         {
             return;
         }
+        
       target.TakeDamage(damage);
       target.GetComponent<DisplayDamage>().ShowDamageCanvas();
     }

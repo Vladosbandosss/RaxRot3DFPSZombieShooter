@@ -9,10 +9,11 @@ public class PlayerHealth : MonoBehaviour
    [SerializeField] private float _health = 100f;
 
    private HealthSlider _healthSlider;
+   private string HEALTHSLIDERNAME = "HealthSlider";
    
    private void Start()
    {
-       _healthSlider = GameObject.Find("HealthSlider").GetComponent<HealthSlider>();
+       _healthSlider = GameObject.Find(HEALTHSLIDERNAME).GetComponent<HealthSlider>();
    }
 
    public void TakeDamage(int damage)

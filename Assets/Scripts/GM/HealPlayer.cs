@@ -13,7 +13,8 @@ public class HealPlayer : MonoBehaviour
     private bool canHeal;
 
     private Light _healPlatformLight;
-    
+
+    private string PLAYERTAG = "Player";
     private void Start()
     {
         heal = Random.Range(minHeal, maxHeal);
@@ -23,7 +24,7 @@ public class HealPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")&&canHeal)
+        if (other.CompareTag(PLAYERTAG)&&canHeal)
         {
            other.GetComponent<PlayerHealth>().HealPlayer(heal);
            canHeal = false;

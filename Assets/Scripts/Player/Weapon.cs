@@ -16,14 +16,12 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private Ammo ammoSlot;
     [SerializeField] private AmmoType AmmoType;
-    
-    //[SerializeField] private float _timeBetweenShoot;
-    //private bool canShoot = true;//не забудь  таймер сделать
 
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _soundShoot;
 
     [SerializeField] private Text ammoText;
+    
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -50,7 +48,6 @@ public class Weapon : MonoBehaviour
         if (ammoSlot.GetCurrentAmmo(AmmoType) > 0)
         {
             _audioSource.PlayOneShot(_soundShoot);
-            //AudioManager.instance.MusicShoot();
             ammoSlot.ReduceCurrentAmmo(AmmoType);
             PlayMuzzleFlash();
             RaycastHit hit;
@@ -64,15 +61,12 @@ public class Weapon : MonoBehaviour
                     return;
                 }
                 target.TakeDamage(damage);
-                Debug.Log("попал по врагу");
             }
             else
             {
                 return;
             }
         }
-        
-
     }
 
     private void PlayMuzzleFlash()

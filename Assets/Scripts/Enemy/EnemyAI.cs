@@ -22,10 +22,15 @@ public class EnemyAI : MonoBehaviour
 
   private EnemyHealth healh;
   private CapsuleCollider _zombieCollider;
+
+  private string PLAYERTAG = "Player";
+
+  private string ATTACKPARAMETR = "attack";
+  private string MOVEPARAMETR = "move";
   
   private void Awake()
   {
-    target = GameObject.FindWithTag("Player").transform;
+    target = GameObject.FindWithTag(PLAYERTAG).transform;
     _navMeshAgent = GetComponent<NavMeshAgent>();
     _animator = GetComponent<Animator>();
     healh = GetComponent<EnemyHealth>();
@@ -37,22 +42,19 @@ public class EnemyAI : MonoBehaviour
     {
       enabled = false;
       _navMeshAgent.enabled = false;
-        //      _zombieCollider.gameObject.SetActive(false);
     }
+    
     distanceToTarget = Vector3.Distance(target.position, transform.position);
     
     if (isProvoked)
     {
-      EngageTarget();//обнаружили игрока
+      EngageTarget();
       
     }else if (distanceToTarget <= _chaseRange)
     {
       isProvoked = true;
-      
-      //_navMeshAgent.SetDestination(target.position);
     }
     
-   
   }
 
   private void EngageTarget()
@@ -60,13 +62,13 @@ public class EnemyAI : MonoBehaviour
     FaceTarget();
     
     if (distanceToTarget>_navMeshAgent.stoppingDistance)
-    {//стоп дист 1 поставил
-      ChaseTarget();//преследуем
+    {
+      ChaseTarget();
     }
 
     if (distanceToTarget<=_navMeshAgent.stoppingDistance)
     {
-      AttackTarget();//атакуем
+      AttackTarget();
      
     }
     
@@ -74,15 +76,15 @@ public class EnemyAI : MonoBehaviour
 
   private void ChaseTarget()
   {
-    _animator.SetBool("attack",false);
-    _animator.SetTrigger("move");
+    _animator.SetBool(ATTACKPARAMETR,false);
+    _animator.SetTrigger(MOVEPARAMETR);
     _navMeshAgent.SetDestination(target.position);
   }
 
   private void AttackTarget()
   {
   
-    _animator.SetBool("attack",true);
+    _animator.SetBool(ATTACKPARAMETR,true);
   }
 
   private void FaceTarget()

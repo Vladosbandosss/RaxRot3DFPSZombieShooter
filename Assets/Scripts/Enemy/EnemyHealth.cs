@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
 
    private bool isDead = false;
 
+   private string DIEPARAMETR = "die";
+
    public bool IsDead()
    {
        return isDead;
@@ -32,6 +34,6 @@ public class EnemyHealth : MonoBehaviour
        }
        
        isDead = true;
-       GetComponent<Animator>().SetTrigger("die");
+       GetComponent<Animator>().SetTrigger(DIEPARAMETR);
    }
 }
